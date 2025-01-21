@@ -3,9 +3,9 @@
 <head>
     <!-- Include A-Frame and AR.js -->
       <meta charset="utf-8" />
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
-
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
@@ -13,9 +13,16 @@
   <div>
     <div>Loading, please wait...</div>
   </div>
-  <a-scene embedded arjs>
+  <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+    <a-assets>
+        <canvas id="myCanvas"></canvas>
+	</a-assets>
     <a-marker type="pattern" url="https://acefree86.github.io/image-tracking/assets/Image/hiro.patt">
-<a-box position="0 0.5 0" scale="0.5 0.5 0.5" material="color: red;"></a-box>
+ <a-box
+               position="0 0.5 0" 
+               material="color: red; transparent: true; opacity: 0.95;"
+               >
+        </a-box>
     </a-marker>
    
     <a-entity camera></a-entity>
