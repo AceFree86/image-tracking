@@ -1,59 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>AR.js NFT Tracking</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.6.0/dist/aframe-master.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <style>
-      .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js AR Image Tracking</title>
+  <script src="https://cdn.jsdelivr.net/npm/aframe/dist/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-ar/dist/aframe-ar.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+  <a-scene embedded arjs>
+    <!-- Image tracking configuration -->
+    <a-marker type="image" url="https://acefree86.github.io/image-tracking/assets/imagen/frame.patt">
+      <!-- 3D object to display when image is detected -->
+      <a-entity 
+        geometry="primitive: sphere; radius: 0.2"
+        material="color: red"
+        position="0 0.2 0">
+      </a-entity>
+    </a-marker>
 
-      .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-      }
-    </style>
-  </head>
-  <body style="margin: 0; overflow: hidden;">
-    <!-- Minimal loader shown until image descriptors are loaded -->
-    <div class="arjs-loader">
-      <div>Loading, please wait...</div>
-    </div>
-
-    <a-scene
-       vr-mode-ui="enabled: false;"
-      renderer="logarithmicDepthBuffer: true;"
-      embedded
-      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
-      <!-- NFT marker definition -->
-      <a-nft
-        type="nft"
-        url="https://acefree86.github.io/image-tracking/assets/trex-descriptors/trex"
-        smooth="true"
-        smoothCount="10"
-        smoothTolerance="0.01"
-        smoothThreshold="5"
-      >
-        <a-box position="50 150 0" scale="80 80 80" material="color: red;"></a-box>
-
-      </a-nft>
-
-      <!-- Camera -->
-      <a-entity camera></a-entity>
-    </a-scene>
-
-  </body>
+    <!-- Camera -->
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
 </html>
