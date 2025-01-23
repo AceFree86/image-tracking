@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const { renderer, scene, camera } = mindarThree;
+  
+  const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+  scene.add(light);
+
   const anchor = mindarThree.addAnchor(0);
 
   const url ="https://acefree86.github.io/image-tracking/assets/models/box.gltf";
