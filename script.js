@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  // Variables for camera movement
   let angle = 0;
   const radius = 3; // Radius of the camera's orbit
   const targetPosition = new THREE.Vector3(0, 0, 0); // Target object position (center)
