@@ -8,7 +8,8 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -16,6 +17,10 @@
 		{
 			"mesh":0,
 			"name":"Cube"
+		},
+		{
+			"mesh":1,
+			"name":"Icosphere"
 		}
 	],
 	"materials":[
@@ -27,6 +32,20 @@
 					0.8002663850784302,
 					0.14104485511779785,
 					0.1340111494064331,
+					1
+				],
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Material.002",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.2930321991443634,
+					0.8002911806106567,
+					0.0674760490655899,
 					1
 				],
 				"metallicFactor":0,
@@ -48,6 +67,20 @@
 					"material":0
 				}
 			]
+		},
+		{
+			"name":"Icosphere",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":4,
+						"NORMAL":5,
+						"TEXCOORD_0":6
+					},
+					"indices":7,
+					"material":1
+				}
+			]
 		}
 	],
 	"accessors":[
@@ -56,14 +89,14 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.15000000596046448,
-				0.30245262384414673,
-				0.15000000596046448
+				0.10000000149011612,
+				0.20163504779338837,
+				0.10000000149011612
 			],
 			"min":[
-				-0.15000000596046448,
-				0.0024525942280888557,
-				-0.15000000596046448
+				-0.10000000149011612,
+				0.0016350626247003675,
+				-0.10000000149011612
 			],
 			"type":"VEC3"
 		},
@@ -83,6 +116,40 @@
 			"bufferView":3,
 			"componentType":5123,
 			"count":36,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":4,
+			"componentType":5126,
+			"count":240,
+			"max":[
+				-0.17281770706176758,
+				0.20326289534568787,
+				0.09496651589870453
+			],
+			"min":[
+				-0.3534550070762634,
+				0.013329856097698212,
+				-0.09496651589870453
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":5,
+			"componentType":5126,
+			"count":240,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":6,
+			"componentType":5126,
+			"count":240,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":7,
+			"componentType":5123,
+			"count":240,
 			"type":"SCALAR"
 		}
 	],
@@ -110,11 +177,35 @@
 			"byteLength":72,
 			"byteOffset":768,
 			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":2880,
+			"byteOffset":840,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":2880,
+			"byteOffset":3720,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":1920,
+			"byteOffset":6600,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":480,
+			"byteOffset":8520,
+			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":840,
+			"byteLength":9000,
 			"uri":"box.bin"
 		}
 	]
