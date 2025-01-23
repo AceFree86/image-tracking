@@ -1,87 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
-          "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
-        }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindAR + Three.js Example</title>
+
+  <!-- Import Map for Module Dependencies -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+        "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
       }
-    </script>
-    <script type="module">
-      import * as THREE from 'three';
-      import { MindARThree } from 'mindar-image-three';
-      const mindarThree = new MindARThree({
-	container: document.querySelector("#container"),
-	imageTargetSrc: "https://acefree86.github.io/image-tracking/assets/Image/targets.mind"
+    }
+  </script>
+
+  <!-- Inline Styles -->
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #control {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Control Panel -->
+  <div id="control">
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+  </div>
+
+  <!-- AR Container -->
+  <div id="container"></div>
+
+  <!-- Script -->
+  <script type="module">
+    import * as THREE from "three";
+    import { MindARThree } from "mindar-image-three";
+
+    // Initialize MindAR with the container and image target source
+    const mindarThree = new MindARThree({
+      container: document.querySelector("#container"),
+      imageTargetSrc: "https://acefree86.github.io/image-tracking/assets/Image/targets.mind",
+    });
+
+    // Extract renderer, scene, and camera
+    const { renderer, scene, camera } = mindarThree;
+    const anchor = mindarThree.addAnchor(0);
+
+    // Create a box and add it to the anchor group
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({
+      color: 0xff0000, // Red color
+      transparent: true,
+      opacity: 0.5,
+    });
+    const box = new THREE.Mesh(geometry, material);
+    anchor.group.add(box);
+
+    // Start the AR session
+    const start = async () => {
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
       });
-      const {renderer, scene, camera} = mindarThree;
-      const anchor = mindarThree.addAnchor(0);
+    };
 
-      const geometry = new THREE.BoxGeometry(1, 1, 1);
-      const material = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.5 }); // Red color
-      const box = new THREE.Mesh(geometry, material);
-      anchor.group.add(box);
-
-      const start = async() => {
-	await mindarThree.start();
-	renderer.setAnimationLoop(() => {
-	  renderer.render(scene, camera);
-	});
-  }
-
-      const startButton = document.querySelector("#startButton");
-      startButton.addEventListener("click", () => {
-        start();
-      });
-
-      const stopButton = document.querySelector("#stopButton");
-      stopButton.addEventListener("click", () => {
-        mindarThree.stop();
-        mindarThree.renderer.setAnimationLoop(null);
-      });
-    </script>
-
-    <style>
-
-      body {
-        margin: 0;
-      }
-
-      #container {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        overflow: hidden;
-      }
-
-      #control {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 10px;
-        border-radius: 8px;
-      }
-
-      button {
-        margin: 5px;
-        padding: 10px 20px;
-        font-size: 20px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="control">
-      <button id="startButton">Start+</button>
-      <button id="stopButton">Stop</button>
-    </div>
-    <div id="container"></div>
-  </body>
+    // Attach event listeners to buttons
+    document.querySelector("#startButton").addEventListener("click", start);
+    document.querySelector("#stopButton").addEventListener("click", () => {
+      mindarThree.stop();
+      renderer.setAnimationLoop(null);
+    });
+  </script>
+</body>
 </html>
