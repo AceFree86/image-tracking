@@ -35,8 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+   const updateCameraPosition = (x, y, z) => {
+     camera.position.set(x, y, z); // Adjust camera position
+     camera.lookAt(new THREE.Vector3(0, 0, 0)); // Make the camera look at the center
+     renderer.render(scene, camera); // Render the scene from the camera's perspective
+   };
+
   const start = async () => {
     await mindarThree.start();
+
+    updateCameraPosition(1, 1, 3);
+
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
     });
@@ -47,4 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
   });
+
+   camera.position.set(0, 1, 3); // Camera is placed slightly above and behind the target
+   camera.lookAt(new THREE.Vector3(0, 0, 0));
 });
