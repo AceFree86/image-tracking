@@ -15,44 +15,26 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(light);
 
   const anchor = mindarThree.addAnchor(0);
-  let modelLoaded = false;
 
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box.gltf";
   const loader = new GLTFLoader();
-
-  const loadModelOnce = () => {
-    if (!modelLoaded) {
-      loader.load(
-        url,
-        (gltf) => {
-          const model = gltf.scene;
-          model.scale.set(10, 10, 10);
-          anchor.group.add(model); // Attach to the anchor's group
-
-          // Mark the model as loaded
-          modelLoaded = true;
-
-          console.log("Model loaded successfully.");
-        },
-        (xhr) => {
-          console.log(
-            `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
-          );
-        },
-        (error) => {
-          console.error(
-            "An error occurred while loading the GLTF model:",
-            error
-          );
-        }
+  loader.load(
+    url,
+    (gltf) => {
+      const model = gltf.scene;
+      model.scale.set(1, 1, 1);
+      anchor.group.add(model);
+    },
+    (xhr) => {
+      console.log(
+        `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
       );
+    },
+    (error) => {
+      console.error("An error occurred while loading the GLTF model:", error);
     }
-  };
-  // Call loadModelOnce when the anchor is activated (image detected)
-  anchor.onDetected(() => {
-    loadModelOnce(); // Load model once when image is detected
-  });
+  );
 
   // Variables for camera movement
   let angle = 0;
