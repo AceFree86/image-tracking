@@ -13,11 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
 
   const loader = new GLTFLoader();
-  loader.load(
-    "./assets/models/box.gltf", // Path to your GLTF file
+  loader.load("https://acefree86.github.io/image-tracking//assets/models/box.gltf",
     (gltf) => {
       const model = gltf.scene;
-      model.scale.set(0.5, 0.5, 0.5); // Adjust the scale if necessary
+      model.scale.set(0.5, 0.5, 0.5);
       anchor.group.add(model);
     },
     (xhr) => {
