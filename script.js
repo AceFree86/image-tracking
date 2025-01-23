@@ -12,23 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const { renderer, scene, camera } = mindarThree;
   const anchor = mindarThree.addAnchor(0);
 
-  const loader = new GLTFLoader();
-  loader.load(
-    "./assets/models/box.gltf",
-    (gltf) => {
-      const model = gltf.scene;
-      model.scale.set(0.5, 0.5, 0.5);
-      anchor.group.add(model);
-    },
-    (xhr) => {
-      console.log(
-        `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
-      );
-    },
-    (error) => {
-      console.error("An error occurred while loading the GLTF model:", error);
-    }
-  );
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const material = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    transparent: true,
+    opacity: 0.5,
+  });
+
+  const box = new THREE.Mesh(geometry, material);
+  anchor.group.add(box);
 
   const start = async () => {
     await mindarThree.start();
