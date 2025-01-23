@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const { renderer, scene, camera } = mindarThree;
   const anchor = mindarThree.addAnchor(0);
 
+  const url ="https://acefree86.github.io/image-tracking/assets/models/box.gltf";
   const loader = new GLTFLoader();
-  loader.load("https://acefree86.github.io/image-tracking/assets/models/box.gltf",
-    (gltf) => {
+  loader.load(url, (gltf) => {
       const model = gltf.scene;
       model.scale.set(1, 1, 1);
       anchor.group.add(model);
