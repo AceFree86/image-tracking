@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
 
   const url =
-    "https://acefree86.github.io/image-tracking/assets/models/box.gltf";
+    "https://acefree86.github.io/image-tracking/assets/models/box.glb";
   const loader = new GLTFLoader();
   loader.load(
     url,
