@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = new GLTFLoader();
   loader.load(url, (gltf) => {
       const model = gltf.scene;
-      model.scale.set(10, 10, 10);
+      model.scale.set(5, 5, 5);
       anchor.group.add(model);
     },
     (xhr) => {
