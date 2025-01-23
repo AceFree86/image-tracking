@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
 
   const url =
-    "https://drive.google.com/uc?export=download&id=1_jO_WyB9JoJUoii4oEuvfPA_iFQJpfFu";
+    "https://acefree86.github.io/image-tracking/assets/models/box.gltf";
   const loader = new GLTFLoader();
   loader.load(
     url,
@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+  // Variables for camera movement
   let angle = 0;
   const radius = 3; // Radius of the camera's orbit
   const targetPosition = new THREE.Vector3(0, 0, 0); // Target object position (center)
@@ -57,9 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     renderer.render(scene, camera);
   };
 
-  const start = () => {
-    mindarThree.start().then(() => {
-      renderer.setAnimationLoop(animateCamera);
+  const start = async () => {
+    await mindarThree.start();
+    renderer.setAnimationLoop(() => {
+      renderer.render(animateCamera);
     });
   };
 
