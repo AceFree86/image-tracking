@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const { renderer, scene, camera } = mindarThree;
-  
+
   const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
   scene.add(light);
 
@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loader.load(url, (gltf) => {
       const model = gltf.scene;
       model.scale.set(1, 1, 1);
+      model.position.set(0, 0, 0);
+      model.lookAt(camera.position);
       anchor.group.add(model);
     },
     (xhr) => {
