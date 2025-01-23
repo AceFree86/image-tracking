@@ -55,7 +55,4 @@ document.addEventListener("DOMContentLoaded", () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
   });
-
-   camera.position.set(0, 1, 3); // Camera is placed slightly above and behind the target
-   camera.lookAt(new THREE.Vector3(0, 0, 0));
 });
