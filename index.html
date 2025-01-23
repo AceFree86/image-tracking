@@ -16,7 +16,6 @@
     }
   </script>
 
-  <!-- Inline Styles -->
   <style>
     body {
       margin: 0;
@@ -57,7 +56,6 @@
   <!-- AR Container -->
   <div id="container"></div>
 
-  <!-- Script -->
   <script type="module">
     import * as THREE from "three";
     import { MindARThree } from "mindar-image-three";
@@ -91,7 +89,10 @@
     };
 
     // Attach event listeners to buttons
-    document.querySelector("#startButton").addEventListener("click", start);
+    document.querySelector("#startButton").addEventListener("click", () => {
+      start();
+    });
+
     document.querySelector("#stopButton").addEventListener("click", () => {
       mindarThree.stop();
       renderer.setAnimationLoop(null);
@@ -99,3 +100,4 @@
   </script>
 </body>
 </html>
+
