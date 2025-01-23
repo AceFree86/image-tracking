@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const model = gltf.scene;
       model.scale.set(1, 1, 1);
       model.position.set(0, 0, 0);
-      model.lookAt(camera.position);
       anchor.group.add(model);
     },
     (xhr) => {
