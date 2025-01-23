@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loader = new GLTFLoader();
   loader.load(
-    "./assets/model.gltf", // Path to your GLTF file
+    "./assets/models/box.gltf", // Path to your GLTF file
     (gltf) => {
       const model = gltf.scene;
       model.scale.set(0.5, 0.5, 0.5); // Adjust the scale if necessary
