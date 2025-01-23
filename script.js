@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loader.load("https://acefree86.github.io/image-tracking/assets/models/box.gltf",
     (gltf) => {
       const model = gltf.scene;
-      model.scale.set(0.5, 0.5, 0.5);
+      model.scale.set(1, 1, 1);
       anchor.group.add(model);
     },
     (xhr) => {
