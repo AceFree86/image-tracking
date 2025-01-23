@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
     container: document.querySelector("#container"),
     imageTargetSrc:
-      "./assets/Image/targets.mind",
+      "https://drive.google.com/uc?export=download&id=1b2jxPtb0Lmb_qWSBIAUqcuNQbHg3ODxt",
   });
 
   const { renderer, scene, camera } = mindarThree;
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
 
   const url =
-    "https://acefree86.github.io/image-tracking/assets/models/box.glb";
+    "https://drive.google.com/uc?export=download&id=1_jO_WyB9JoJUoii4oEuvfPA_iFQJpfFu";
   const loader = new GLTFLoader();
   loader.load(
     url,
