@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
     container: document.querySelector("#container"),
     imageTargetSrc:
-      "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
+      "./assets/Image/targets.mind",
   });
 
   const { renderer, scene, camera } = mindarThree;
