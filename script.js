@@ -16,12 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const anchor = mindarThree.addAnchor(0);
 
-  const url ="https://acefree86.github.io/image-tracking/assets/models/box.gltf";
+  const url =
+    "https://acefree86.github.io/image-tracking/assets/models/box.gltf";
   const loader = new GLTFLoader();
-  loader.load(url, (gltf) => {
+  loader.load(
+    url,
+    (gltf) => {
       const model = gltf.scene;
       model.scale.set(1, 1, 1);
-      model.rotation.set(0, 0, -90);
       anchor.group.add(model);
     },
     (xhr) => {
@@ -34,10 +36,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+  // Variables for camera movement
+  let angle = 0;
+  const radius = 3; // Radius of the camera's orbit
+  const targetPosition = new THREE.Vector3(0, 0, 0); // Target object position (center)
+
+  const updateCameraPosition = () => {
+    // Calculate the camera's position in polar coordinates (circle)
+    camera.position.x = targetPosition.x + radius * Math.cos(angle);
+    camera.position.y = targetPosition.y + 1; // Adjust vertical position
+    camera.position.z = targetPosition.z + radius * Math.sin(angle);
+
+    // Make the camera always look at the target
+    camera.lookAt(targetPosition);
+  };
+
+  // Animation loop to rotate the camera around the object
+  const animateCamera = () => {
+    angle += 0.01; // Adjust this value to change the speed of the camera's rotation
+    updateCameraPosition();
+    renderer.render(scene, camera);
+  };
+
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      renderer.render(scene, camera);
+      renderer.render(animateCamera);
     });
   };
 
