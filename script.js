@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loader.load(url, (gltf) => {
       const model = gltf.scene;
       model.scale.set(1, 1, 1);
+      model.rotation.set(0, 0, -90);
       anchor.group.add(model);
     },
     (xhr) => {
