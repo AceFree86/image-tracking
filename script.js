@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
+  const model = null;
   loader.load(url,(gltf) => {
-      const model = gltf.scene;
-      
-      anchor.group.add(model);
+      model = gltf.scene;
+      onLoadCallback(loadedModel);
     },
     (xhr) => {
       errorDisplay.textContent = "loaded";
@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+anchor.group.add(model);
   const start = async () => {
    await mindarThree.start();
    renderer.setAnimationLoop(() => {
