@@ -39,22 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  let angle = 0;
-  const radius = 2; // Radius of the camera's orbit
-  const targetPosition = new THREE.Vector3(0, 0, 0);
-
-  const updateCameraPosition = () => {
-    camera.position.x = targetPosition.x + radius * Math.cos(angle);
-    camera.position.y = targetPosition.y + 1;
-    camera.position.z = targetPosition.z + radius * Math.sin(angle);
-    camera.lookAt(targetPosition);
-  };
-
-  const animateCamera = () => {
-    angle += 0.01; // Speed of rotation
-    updateCameraPosition();
-  };
-
+  
   const start = async () => {
    await mindarThree.start();
    renderer.setAnimationLoop(() => {
