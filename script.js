@@ -39,29 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  let angle = 0; // Initial angle for horizontal rotation
-  let verticalAngle = Math.PI / 4; // Vertical angle (elevation), default at 45 degrees
-  const radius = 2; // Fixed radius of the orbit
-  const targetPosition = new THREE.Vector3(0, 0, 0); // Center of the 3D object
+  let angle = 0;
+  const radius = 2; // Radius of the camera's orbit
+  const targetPosition = new THREE.Vector3(0, 0, 0); // Target object position (center)
 
   const updateCameraPosition = () => {
-    // Calculate the new camera position in spherical coordinates
-    camera.position.x =
-      targetPosition.x + radius * Math.cos(verticalAngle) * Math.cos(angle); // X-coordinate
-    camera.position.y = targetPosition.y + radius * Math.sin(verticalAngle); // Y-coordinate (elevation)
-    camera.position.z =
-      targetPosition.z + radius * Math.cos(verticalAngle) * Math.sin(angle); // Z-coordinate
+    // Calculate the camera's position in polar coordinates (circle)
+    camera.position.x = targetPosition.x + radius * Math.cos(angle);
+    camera.position.y = targetPosition.y + 1; // Adjust vertical position
+    camera.position.z = targetPosition.z + radius * Math.sin(angle);
     camera.lookAt(targetPosition);
   };
 
   const animateCamera = () => {
-    angle += 0.01; // Horizontal rotation speed
-    if (angle >= Math.PI * 2) {
-      angle -= Math.PI * 2; // Reset angle to prevent overflow
-    }
+    angle += 0.01; // Speed of rotation
     updateCameraPosition();
   };
-
 
   const start = async () => {
    await mindarThree.start();
