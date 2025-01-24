@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const { renderer, scene, camera } = mindarThree;
+
+  renderer.antialias = true;
   let group;
 
   scene.add(new THREE.HemisphereLight(0xbcbcbc, 0xa5a5a5, 3));
