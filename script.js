@@ -5,9 +5,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
     container: document.querySelector("#container"),
-    imageTargetSrc:
-      "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
-  });
+    imageTargetSrc:"https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",});
 
   const { renderer, scene, camera } = mindarThree;
 
@@ -18,11 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const light = new THREE.DirectionalLight(0xffffff, 3);
   light.position.set(0, 6, 0);
   light.castShadow = true;
-  light.shadow.camera.top = 3;
-  light.shadow.camera.bottom = -3;
-  light.shadow.camera.right = 3;
-  light.shadow.camera.left = -3;
-  light.shadow.mapSize.set(512, 512);
+
   scene.add(light);
 
   group = new THREE.Group();
