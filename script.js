@@ -29,6 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(group);
 
   const anchor = mindarThree.addAnchor(0);
+  
+   anchor.onTargetFound = () => {
+     anchor.group.scale.set(1, 1, 1); // Fix scale
+     anchor.group.rotation.set(0, 0, 0); // Fix rotation
+     console.log("Target found: Adjusting anchor transformations");
+   };
 
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
@@ -58,9 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
   anchor.group.add(group);
-  anchor.group.scale.set(1, 1, 1);
+
 
   const start = async () => {
+    camera.fov = 60; // Set FOV for natural perspective
+    camera.updateProjectionMatrix();
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       camera.updateMatrixWorld();
