@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
+      model.scale.set(1, 1, 1);
       group.add(model);
     },
     (xhr) => {
