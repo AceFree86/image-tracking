@@ -10,9 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const { renderer, scene, camera } = mindarThree;
+  let controls, group;
 
-  const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+  const light = new THREE.DirectionalLight(0xffffff, 3);
+  light.position.set(0, 6, 0);
+  light.castShadow = true;
+  light.shadow.camera.top = 3;
+  light.shadow.camera.bottom = -3;
+  light.shadow.camera.right = 3;
+  light.shadow.camera.left = -3;
+  light.shadow.mapSize.set(512, 512);
   scene.add(light);
+
+  group = new THREE.Group();
+  scene.add(group);
 
   const anchor = mindarThree.addAnchor(0);
 
@@ -22,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loader.load(url,(gltf) => {
       const model = gltf.scene;
-    
+      group.add(model);
     },
     (xhr) => {
       errorDisplay.textContent = "loaded";
