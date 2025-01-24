@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
     url,
     (gltf) => {
       const model = gltf.scene;
+      model.position.set(0, 0, 0);
+      model.rotation.set(0, 0, 0);
       group.add(model);
     },
     (xhr) => {
