@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
+      camera.updateMatrixWorld();
       renderer.render(scene, camera);
     });
   };
