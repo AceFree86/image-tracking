@@ -22,7 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   light.position.set(0.2, 1, 1);
   scene.add(light);
 
-  const camera = new THREE.PerspectiveCamera();
+  const camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    1,
+    3000
+  );
   camera.matrixAutoUpdate = false;
 
   group = new THREE.Group();
