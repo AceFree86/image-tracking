@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const model = null;
   loader.load(url,(gltf) => {
       model = gltf.scene;
-      onLoadCallback(loadedModel);
+    
     },
     (xhr) => {
       errorDisplay.textContent = "loaded";
