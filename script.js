@@ -9,17 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene } = mindarThree;
+  const { renderer, scene, camera } = mindarThree;
   let group;
-  let camera;
-
-camera = new THREE.PerspectiveCamera(
-  50,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  10
-);
-camera.position.set(0, 1.6, 3);
 
   scene.add(new THREE.HemisphereLight(0xbcbcbc, 0xa5a5a5, 3));
   const light = new THREE.DirectionalLight(0xffffff, 3);
@@ -37,11 +28,14 @@ camera.position.set(0, 1.6, 3);
 
   const anchor = mindarThree.addAnchor(0);
 
-  const url ="https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
+  const url =
+    "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
-  loader.load(url,(gltf) => {
+  loader.load(
+    url,
+    (gltf) => {
       const model = gltf.scene;
       group.add(model);
     },
@@ -58,14 +52,30 @@ camera.position.set(0, 1.6, 3);
       )}`;
     }
   );
+  anchor.group.add(group);
 
-anchor.group.add(group);
+  let angle = 0;
+  const radius = 3; // Radius of the camera's orbit
+  const targetPosition = new THREE.Vector3(0, 0, 0);
+
+  const updateCameraPosition = () => {
+    camera.position.x = targetPosition.x + radius * Math.cos(angle);
+    camera.position.y = targetPosition.y + 1;
+    camera.position.z = targetPosition.z + radius * Math.sin(angle);
+    camera.lookAt(targetPosition);
+  };
+
+   const animateCamera = () => {
+     angle += 0.01; // Adjust this value to change the speed of the camera's rotation
+     updateCameraPosition();
+   };
 
   const start = async () => {
-   await mindarThree.start();
-   renderer.setAnimationLoop(() => {
-     renderer.render(scene, camera);
-   });
+    await mindarThree.start();
+    renderer.setAnimationLoop(() => {
+       animateCamera();
+      renderer.render(scene, camera);
+    });
   };
 
   document.querySelector("#startButton").addEventListener("click", start);
