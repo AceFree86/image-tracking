@@ -7,17 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
     container: document.querySelector("#container"),
     imageTargetSrc:"https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",});
 
-  const { renderer, scene, camera } = mindarThree;
+  const { renderer, scene} = mindarThree;
 
-  renderer.antialias = true;
   let group;
 
-  scene.add(new THREE.HemisphereLight(0xbcbcbc, 0xa5a5a5, 3));
-  const light = new THREE.DirectionalLight(0xffffff, 3);
-  light.position.set(0, 6, 0);
-  light.castShadow = true;
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+  directionalLight.position.set(10, 15, 10);
+  scene.add(directionalLight);
 
+  const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 0.3);
+  scene.add(ambient);
+
+  const light = new THREE.DirectionalLight();
+  light.position.set(0.2, 1, 1);
   scene.add(light);
+
+  const camera = new THREE.PerspectiveCamera();
+  camera.matrixAutoUpdate = false;
 
   group = new THREE.Group();
   scene.add(group);
