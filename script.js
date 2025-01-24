@@ -25,15 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
-  var horizontalFov = 90;
-  camera.fov =
-    (Math.atan(
-      Math.tan(((horizontalFov / 2) * Math.PI) / 180) / camera.aspect
-    ) *
-      2 *
-      180) /
-    Math.PI;
-
   group = new THREE.Group();
   scene.add(group);
 
@@ -66,13 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
   anchor.group.add(group);
-
-  // Debugging
-  const cameraHelper = new THREE.CameraHelper(camera);
-  scene.add(cameraHelper);
-
-  const axesHelper = new THREE.AxesHelper(5);
-  scene.add(axesHelper);
 
   const start = async () => {
     await mindarThree.start();
