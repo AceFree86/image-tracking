@@ -33,9 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
-  loader.load(
-    url,
-    (gltf) => {
+  loader.load(url,(gltf) => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
@@ -56,9 +54,22 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   anchor.group.add(group);
 
+  let angle = 0;
+  const radius = 3; // Radius of the camera's orbit
+  const targetPosition = new THREE.Vector3(0, 0, 0);
+
+  const updateCameraPosition = () => {
+    camera.position.x = targetPosition.x + radius * Math.cos(angle);
+    camera.position.y = targetPosition.y + 1; // Adjust vertical position
+    camera.position.z = targetPosition.z + radius * Math.sin(angle);
+    camera.lookAt(targetPosition);
+  };
+
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
+       angle += 0.01;
+       updateCameraPosition();
       renderer.render(scene, camera);
     });
   };
