@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loader.load(url,(gltf) => {
       const model = gltf.scene;
-      model.scale.set(1, 1, 1);
+      model.scale.set(10, 10, 10);
       anchor.group.add(model);
     },
     (xhr) => {
