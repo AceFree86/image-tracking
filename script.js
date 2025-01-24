@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-       animateCamera();
       renderer.render(scene, camera);
     });
   };
