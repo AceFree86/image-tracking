@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     container: document.querySelector("#container"),
     imageTargetSrc:"https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",});
 
-  const { renderer, scene} = mindarThree;
+  const { renderer, scene, camera } = mindarThree;
 
   let group;
 
@@ -22,8 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   light.position.set(0.2, 1, 1);
   scene.add(light);
 
-  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-  scene.add(camera);
+var horizontalFov = 90;
+camera.fov =
+  (Math.atan(Math.tan(((horizontalFov / 2) * Math.PI) / 180) / camera.aspect) *
+    2 *
+    180) /
+  Math.PI;
 
   group = new THREE.Group();
   scene.add(group);
