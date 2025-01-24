@@ -20,9 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
-  const model = null;
   loader.load(url,(gltf) => {
-      model = gltf.scene;
+      const model = gltf.scene;
     
     },
     (xhr) => {
@@ -39,7 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-anchor.group.add(model);
+   const geometry = new THREE.PlaneGeometry(1, 0.55);
+   const material = new THREE.MeshBasicMaterial({
+     color: 0x00ffff,
+     transparent: true,
+     opacity: 0.5,
+   });
+   const plane = new THREE.Mesh(geometry, material);
+
+anchor.group.add(plane);
   const start = async () => {
    await mindarThree.start();
    renderer.setAnimationLoop(() => {
