@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const { renderer, scene, camera } = mindarThree;
-  let controls, group;
+  let group;
 
   const light = new THREE.DirectionalLight(0xffffff, 3);
   light.position.set(0, 6, 0);
@@ -49,15 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-   const geometry = new THREE.PlaneGeometry(1, 0.55);
-   const material = new THREE.MeshBasicMaterial({
-     color: 0x00ffff,
-     transparent: true,
-     opacity: 0.5,
-   });
-   const plane = new THREE.Mesh(geometry, material);
-
-anchor.group.add(plane);
+anchor.group.add(group);
   const start = async () => {
    await mindarThree.start();
    renderer.setAnimationLoop(() => {
