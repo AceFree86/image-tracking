@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loader.load(url,(gltf) => {
       const model = gltf.scene;
-      model.scale.set(3, 3, 3);
+      model.scale.set(1, 1, 1);
       anchor.group.add(model);
     },
     (xhr) => {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
    await mindarThree.start();
    renderer.setAnimationLoop(() => {
-     renderer.render(animateCamera);
+    renderer.render(scene, camera);
    });
   };
 
