@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
   anchor.group.add(group);
+  anchor.group.scale.set(1, 1, 1);
 
   const start = async () => {
     await mindarThree.start();
