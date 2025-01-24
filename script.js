@@ -17,22 +17,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
 
   const url =
-    "https://acefree86.github.io/image-tracking/assets/models/box.gltf";
+    "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
   const loader = new GLTFLoader();
-  loader.load(
-    url,
-    (gltf) => {
+  const errorDisplay = document.querySelector("#error-message");
+
+  loader.load(url,(gltf) => {
       const model = gltf.scene;
       model.scale.set(1, 1, 1);
       anchor.group.add(model);
     },
     (xhr) => {
+      errorDisplay.textContent = "loaded";
       console.log(
         `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
       );
     },
     (error) => {
-      console.error("An error occurred while loading the GLTF model:", error);
+      errorDisplay.textContent = `Error: ${JSON.stringify(
+        error,
+        Object.getOwnPropertyNames(error)
+      )}`;
     }
   );
 
