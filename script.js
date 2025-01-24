@@ -5,29 +5,34 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
     container: document.querySelector("#container"),
-    imageTargetSrc:"https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",});
+    imageTargetSrc:
+      "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
+  });
 
   const { renderer, scene, camera } = mindarThree;
 
   let group;
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
-  directionalLight.position.set(10, 15, 10);
-  scene.add(directionalLight);
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
 
-  const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 0.3);
-  scene.add(ambient);
+  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
+  directionalLight1.position.set(5, 5, 5);
+  scene.add(directionalLight1);
 
-  const light = new THREE.DirectionalLight();
-  light.position.set(0.2, 1, 1);
-  scene.add(light);
+  const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+  directionalLight2.position.set(-5, -5, 5);
+  scene.add(directionalLight2);
 
-var horizontalFov = 90;
-camera.fov =
-  (Math.atan(Math.tan(((horizontalFov / 2) * Math.PI) / 180) / camera.aspect) *
-    2 *
-    180) /
-  Math.PI;
+  var horizontalFov = 90;
+  camera.fov =
+    (Math.atan(
+      Math.tan(((horizontalFov / 2) * Math.PI) / 180) / camera.aspect
+    ) *
+      2 *
+      180) /
+    Math.PI;
 
   group = new THREE.Group();
   scene.add(group);
@@ -39,7 +44,9 @@ camera.fov =
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
-  loader.load(url,(gltf) => {
+  loader.load(
+    url,
+    (gltf) => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
@@ -59,6 +66,13 @@ camera.fov =
     }
   );
   anchor.group.add(group);
+
+  // Debugging
+  const cameraHelper = new THREE.CameraHelper(camera);
+  scene.add(cameraHelper);
+
+  const axesHelper = new THREE.AxesHelper(5);
+  scene.add(axesHelper);
 
   const start = async () => {
     await mindarThree.start();
