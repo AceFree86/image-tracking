@@ -17,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     antialias: true,
     logarithmicDepthBuffer: true,
     alpha: true,
-    preserveDrawingBuffer: true,
+    powerPreference: "high-performance",
   });
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-        groupM.lookAt(new THREE.Vector3());
+      groupM.lookAt(new THREE.Vector3());
       renderer.render(scene, camera);
     });
   };
