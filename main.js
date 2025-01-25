@@ -69,13 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
       )}`;
     }
   );
-  //anchor.group.add(group);
+  anchor.group.add(group);
 
   const start = async () => {
     
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-     // camera.updateMatrixWorld();
       renderer.render(scene, camera);
     });
   };
