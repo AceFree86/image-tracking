@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const groupM = new THREE.Group();
   const anchor = mindarThree.addAnchor(0);
+  anchor.group.add(groupM);
 
   // Load the GLTF model
   const url =
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  anchor.group.add(groupM);
+  
 
   const start = async () => {
     await mindarThree.start();
