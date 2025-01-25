@@ -30,7 +30,8 @@ group = new THREE.Group();
 
 const anchor = mindarThree.addAnchor(0);
 
-const url = "https://acefree86.github.io/image-tracking/assets/models/box2.glb";
+const url =
+  "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
 const loader = new GLTFLoader();
 const errorDisplay = document.querySelector("#error-message");
 
