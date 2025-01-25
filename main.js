@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
-  const group = new THREE.Group();
+  const groupM = new THREE.Group();
   const anchor = mindarThree.addAnchor(0);
 
   // Load the GLTF model
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
-      group.add(model);
+      groupM.add(model);
     },
     (xhr) => {
       if (errorDisplay) {
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  anchor.group.add(group);
+  anchor.group.add(groupM);
 
   // Ensure anchor maintains proper transformations
   anchor.onTargetFound = () => {
@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
+        groupM.lookAt(new THREE.Vector3());
       renderer.render(scene, camera);
     });
   };
