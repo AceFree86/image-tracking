@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     (gltf) => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
-      model.rotation.set(-Math.PI / 1, 0, 0); // Adjust rotation to face forward
+      model.rotation.set(0, 0, 0); // Reset rotation
+      model.rotateX(Math.PI); // Rotate 180 degrees on the X-axis to correct orientation
       model.scale.set(1, 1, 1);
       group.add(model);
     },
