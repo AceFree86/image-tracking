@@ -68,15 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  anchor.onTargetFound = () => {
-    if (!objectPlaced) {
-      storedWorldPosition.setFromMatrixPosition(groupM.matrixWorld);
-      scene.add(groupM);
-      objectPlaced = true;
-      anchor.group.remove(groupM);
-      groupM.position.copy(storedWorldPosition);
-    }
-  };
+ 
 
   const start = async () => {
     await mindarThree.start();
