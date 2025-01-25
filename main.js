@@ -35,14 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
-  // Load the GLTF model
+  const group = new THREE.Group();
+  const anchor = mindarThree.addAnchor(0);
+ // Load the GLTF model
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
   const loader = new GLTFLoader();
-
-  const group = new THREE.Group();
-  const anchor = mindarThree.addAnchor(0);
-
   const errorDisplay = document.querySelector("#error-message");
 
   loader.load(
