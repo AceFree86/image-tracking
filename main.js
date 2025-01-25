@@ -76,9 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Listen for the target being found
   anchor.onTargetFound = () => {
-      anchor.group.getWorldPosition(currentPosition);
-      anchor.group.getWorldQuaternion(currentRotation); // Convert quaternion to Euler if needed
-      anchor.group.getWorldScale(currentScale);
+     
   };
 
   // Listen for the target being lost
