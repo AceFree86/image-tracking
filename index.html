@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>My first three.js app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
     <script type="importmap">
       {
         "imports": {
@@ -13,12 +16,12 @@
         }
       }
     </script>
-     <script src="main.js" type="module" defer></script>
+    <script src="main.js" type="module" defer></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div id="control">
-       <p id="error-message" style="color: red;"></p> 
+      <p id="error-message" style="color: red"></p>
       <button id="startButton">Старти</button>
       <button id="stopButton">Стоп</button>
     </div>
