@@ -70,11 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   anchor.onTargetFound = () => {
     if (!objectPlaced) {
-      storedWorldPosition.setFromMatrixPosition(group.matrixWorld);
-      scene.add(group);
+      storedWorldPosition.setFromMatrixPosition(groupM.matrixWorld);
+      scene.add(groupM);
       objectPlaced = true;
-      anchor.group.remove(group);
-      group.position.copy(storedWorldPosition);
+      anchor.group.remove(groupM);
+      groupM.position.copy(storedWorldPosition);
     }
   };
 
