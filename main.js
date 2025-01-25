@@ -4,8 +4,6 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
-  const width = container.clientWidth || window.innerWidth;
-  const height = container.clientHeight || window.innerHeight;
 
   const mindarThree = new MindARThree({
     container,
@@ -13,7 +11,20 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene, camera } = mindarThree;
+  const { renderer, scene } = mindarThree;
+
+  let previousPosition = new THREE.Vector3();
+  let previousRotation = new THREE.Euler();
+  let previousScale = new THREE.Vector3();
+
+  // Camera setup
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    1,
+    1000
+  );
+  scene.add(camera);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -41,8 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     (gltf) => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
-      model.rotation.set(0, 0, 0); // Reset rotation
-     
+      model.rotation.set(0, 0, 0);
       model.scale.set(1, 1, 1);
       group.add(model);
     },
@@ -64,11 +74,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   anchor.group.add(group);
 
-  // Ensure anchor maintains proper transformations
+  // Listen for the target being found
   anchor.onTargetFound = () => {
-    anchor.group.scale.set(1, 1, 1);
-    anchor.group.rotation.set(0, 0, 0);
-    console.log("Target found: Anchor transformations reset");
+      anchor.group.getWorldPosition(currentPosition);
+      anchor.group.getWorldQuaternion(currentRotation); // Convert quaternion to Euler if needed
+      anchor.group.getWorldScale(currentScale);
+  };
+
+  // Listen for the target being lost
+  anchor.onTargetLost = () => {
+    console.log("Target lost!");
+    previousPosition.copy(currentPosition);
+    previousRotation.copy(currentRotation);
+    previousScale.copy(currentScale);
   };
 
   const start = async () => {
