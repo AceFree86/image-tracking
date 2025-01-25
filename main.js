@@ -13,11 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
-  let previousPosition = new THREE.Vector3();
-  let previousRotation = new THREE.Euler();
-  let previousScale = new THREE.Vector3();
-
-
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -44,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     (gltf) => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
-      model.rotation.set(0, 0, 0);
+      model.rotation.set(0, 0, 0); // Reset rotation
+
       model.scale.set(1, 1, 1);
       group.add(model);
     },
@@ -66,15 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   anchor.group.add(group);
 
-  // Listen for the target being found
+  // Ensure anchor maintains proper transformations
   anchor.onTargetFound = () => {
-     
-  };
-
-  // Listen for the target being lost
-  anchor.onTargetLost = () => {
-    console.log("Target lost!");
-   
+    anchor.group.scale.set(1, 1, 1);
+    anchor.group.rotation.set(0, 0, 0);
+    console.log("Target found: Anchor transformations reset");
   };
 
   const start = async () => {
