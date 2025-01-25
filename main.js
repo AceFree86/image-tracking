@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     url,
     (gltf) => {
       const model = gltf.scene;
-      model.position.set(0, 0, 0);
+      //model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
       groupM.add(model);
@@ -67,14 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-   anchor.onTargetFound = () => {
-     if (!objectPlaced) {
-       // Once the object is placed, remove it from the anchor and add it directly to the scene
-       scene.add(group);
-       objectPlaced = true; // Set flag so the object doesn't move with the target anymore
-       console.log("3D object placed and will stay in the scene!");
-     }
-   };
+  anchor.onTargetFound = () => {
+    if (!objectPlaced) {
+      // Once the object is placed, remove it from the anchor and add it directly to the scene
+      scene.add(group);
+      objectPlaced = true; // Set flag so the object doesn't move with the target anymore
+      console.log("3D object placed and will stay in the scene!");
+      anchor.group.remove(group);
+    }
+  };
 
   const start = async () => {
     await mindarThree.start();
