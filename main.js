@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
+  let objectPlaced = false;
+
   // Set camera near and far planes
   camera.near = 0.1; // Minimum render distance
   camera.far = 1000; // Maximum render distance
@@ -64,6 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error loading model:", error);
     }
   );
+
+   anchor.onTargetFound = () => {
+     if (!objectPlaced) {
+       // Once the object is placed, remove it from the anchor and add it directly to the scene
+       scene.add(group);
+       objectPlaced = true; // Set flag so the object doesn't move with the target anymore
+       console.log("3D object placed and will stay in the scene!");
+     }
+   };
 
   const start = async () => {
     await mindarThree.start();
