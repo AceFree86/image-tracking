@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
- 
-
   // Set camera near and far planes
   camera.near = 0.1; // Minimum render distance
   camera.far = 1000; // Maximum render distance
@@ -67,11 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
- 
-
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
+      camera.updateProjectionMatrix();
       renderer.render(scene, camera);
     });
   };
