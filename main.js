@@ -11,10 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene} = mindarThree;
 
-  let group;
+  //let group;
 
-  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-  scene.add(camera);
+ 
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -36,11 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const anchor = mindarThree.addAnchor(0);
 
-  anchor.onTargetFound = () => {
-    anchor.group.scale.set(1, 1, 1); // Fix scale
-    anchor.group.rotation.set(0, 0, 0); // Fix rotation
-    console.log("Target found: Adjusting anchor transformations");
-  };
 
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
