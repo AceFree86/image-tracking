@@ -68,13 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   anchor.group.add(groupM);
 
-  // Ensure anchor maintains proper transformations
-  anchor.onTargetFound = () => {
-    anchor.group.scale.set(1, 1, 1);
-    anchor.group.rotation.set(0, 0, 0);
-    console.log("Target found: Anchor transformations reset");
-  };
-
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
