@@ -16,10 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
     logarithmicDepthBuffer: true,
-    alpha: true,
-    powerPreference: "high-performance",
+    alpha: true
   });
-  renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
