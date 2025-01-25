@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      groupM.lookAt(new THREE.Vector3());
       renderer.render(scene, camera);
     });
   };
