@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const { renderer, scene, camera } = mindarThree;
 
   let objectPlaced = false;
+  let storedWorldPosition = new THREE.Vector3();
 
   // Set camera near and far planes
   camera.near = 0.1; // Minimum render distance
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     url,
     (gltf) => {
       const model = gltf.scene;
-      //model.position.set(0, 0, 0);
+      model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
       groupM.add(model);
@@ -69,11 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   anchor.onTargetFound = () => {
     if (!objectPlaced) {
-      // Once the object is placed, remove it from the anchor and add it directly to the scene
+      storedWorldPosition.setFromMatrixPosition(group.matrixWorld);
       scene.add(group);
-      objectPlaced = true; // Set flag so the object doesn't move with the target anymore
-      console.log("3D object placed and will stay in the scene!");
+      objectPlaced = true;
       anchor.group.remove(group);
+      group.position.copy(storedWorldPosition);
     }
   };
 
