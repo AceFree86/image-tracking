@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
       model.scale.set(1, 1, 1);
-      model.computeVertexNormals();
+  
       group.add(model);
     },
     (xhr) => {
