@@ -31,17 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(group);
 
   const anchor = mindarThree.addAnchor(0);
-  anchor.onTargetFound = () => {
-    anchor.group.scale.set(1, 1, 1); // Ensure uniform scaling.
-    anchor.group.rotation.set(0, 0, 0); // Reset rotation if necessary.
-  };
-
-  anchor.onTargetFound = () => {
-    anchor.group.scale.set(1, 1, 1); // Fix scale
-    anchor.group.rotation.set(0, 0, 0); // Fix rotation
-    console.log("Target found: Adjusting anchor transformations");
-  };
-
+ 
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
   const loader = new GLTFLoader();
