@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
 
@@ -17,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   camera.position.z = 1;
   const scene = new THREE.Scene();
   const renderer = new THREE.WebGLRenderer();
+
+  // Set the renderer size
+  renderer.setSize(width, height);
+  container.appendChild(renderer.domElement); // Add the renderer canvas to the container
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
