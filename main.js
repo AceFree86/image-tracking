@@ -82,9 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Listen for the target being lost
   anchor.onTargetLost = () => {
     console.log("Target lost!");
-    previousPosition.copy(currentPosition);
-    previousRotation.copy(currentRotation);
-    previousScale.copy(currentScale);
+   
   };
 
   const start = async () => {
