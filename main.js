@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(directionalLight2);
 
   group = new THREE.Group();
-  scene.add(group);
 
   const anchor = mindarThree.addAnchor(0);
  
@@ -44,22 +43,26 @@ document.addEventListener("DOMContentLoaded", () => {
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
       model.scale.set(1, 1, 1);
-  
+
       group.add(model);
     },
     (xhr) => {
-      errorDisplay.textContent = "loaded";
+      if (errorDisplay) errorDisplay.textContent = "loaded";
       console.log(
         `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
       );
     },
     (error) => {
-      errorDisplay.textContent = `Error: ${JSON.stringify(
-        error,
-        Object.getOwnPropertyNames(error)
-      )}`;
+      if (errorDisplay) {
+        errorDisplay.textContent = `Error: ${JSON.stringify(
+          error,
+          Object.getOwnPropertyNames(error)
+        )}`;
+      }
+      console.error("Error loading model:", error);
     }
   );
+  
   anchor.group.add(group);
 
   const start = async () => {
