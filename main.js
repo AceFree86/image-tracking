@@ -18,11 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   camera.position.z = 1;
   const scene = new THREE.Scene();
   const renderer = new THREE.WebGLRenderer();
-
-  // Set the renderer size
-  renderer.setSize(width, height);
-  container.appendChild(renderer.domElement); // Add the renderer canvas to the container
-
+ 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
