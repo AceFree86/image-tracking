@@ -72,11 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //anchor.group.add(group);
 
   const start = async () => {
-    camera.fov = 60; // Set FOV for natural perspective
-    camera.updateProjectionMatrix();
+    
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      camera.updateMatrixWorld();
+     // camera.updateMatrixWorld();
       renderer.render(scene, camera);
     });
   };
