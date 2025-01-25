@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene} = mindarThree;
+  const { renderer, scene, camera } = mindarThree;
 
   //let group;
 
