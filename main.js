@@ -9,12 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene} = mindarThree;
+  const { renderer, scene, camera } = mindarThree;
 
   let group;
 
-  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-  scene.add(camera);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
