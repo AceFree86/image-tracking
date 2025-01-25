@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+
   const mindarThree = new MindARThree({
     container: document.querySelector("#container"),
     imageTargetSrc:
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error loading model:", error);
     }
   );
-  
+
   anchor.group.add(group);
 
   const start = async () => {
@@ -78,4 +78,3 @@ document.addEventListener("DOMContentLoaded", () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
   });
-});
