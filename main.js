@@ -11,7 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene, camera } = mindarThree;
+  const width = window.innerWidth,
+    height = window.innerHeight;
+  const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
+  camera.position.z = 1;
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer();
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -25,13 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
-  const group = new THREE.Group();
-  const anchor = mindarThree.addAnchor(0);
-
   // Load the GLTF model
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
   const loader = new GLTFLoader();
+
+  const group = new THREE.Group();
+  const anchor = mindarThree.addAnchor(0);
+
   const errorDisplay = document.querySelector("#error-message");
 
   loader.load(
