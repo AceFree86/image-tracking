@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
 
@@ -12,13 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const width = window.innerWidth,
-    height = window.innerHeight;
-  const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
-  camera.position.z = 1;
-  const scene = new THREE.Scene();
-  const renderer = new THREE.WebGLRenderer();
- 
+  const { renderer, scene, camera } = mindarThree;
+
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -33,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const group = new THREE.Group();
   const anchor = mindarThree.addAnchor(0);
- // Load the GLTF model
+
+  // Load the GLTF model
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/box2.gltf";
   const loader = new GLTFLoader();
@@ -44,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     (gltf) => {
       const model = gltf.scene;
       model.position.set(0, 0, 0);
-      model.rotation.set(0, 0, 0);
+      model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
       group.add(model);
     },
@@ -65,6 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   anchor.group.add(group);
+
+  // Ensure anchor maintains proper transformations
+  anchor.onTargetFound = () => {
+    anchor.group.scale.set(1, 1, 1);
+    anchor.group.rotation.set(0, 0, 0);
+    console.log("Target found: Anchor transformations reset");
+  };
 
   const start = async () => {
     await mindarThree.start();
