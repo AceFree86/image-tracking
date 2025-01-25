@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
-  let objectPlaced = false;
-  let storedWorldPosition = new THREE.Vector3();
+ 
 
   // Set camera near and far planes
   camera.near = 0.1; // Minimum render distance
