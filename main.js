@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene } = mindarThree;
 
-
+  let group;
 
   const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
   scene.add(camera);
@@ -27,10 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
-  const object = new THREE.Object3D();
-  scene.add(object);
+  group = new THREE.Group();
+  scene.add(group);
 
   const anchor = mindarThree.addAnchor(0);
+  anchor.onTargetFound = () => {
+    anchor.group.scale.set(1, 1, 1); // Ensure uniform scaling.
+    anchor.group.rotation.set(0, 0, 0); // Reset rotation if necessary.
+  };
 
   anchor.onTargetFound = () => {
     anchor.group.scale.set(1, 1, 1); // Fix scale
@@ -50,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0);
       model.scale.set(1, 1, 1);
-      object.add(model);
+      group.add(model);
     },
     (xhr) => {
       errorDisplay.textContent = "loaded";
@@ -65,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       )}`;
     }
   );
-  anchor.group.add(object);
+  //anchor.group.add(group);
 
   const start = async () => {
     camera.fov = 60; // Set FOV for natural perspective
