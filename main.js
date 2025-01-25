@@ -15,8 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
-    logarithmicDepthBuffer: true,
-    alpha: true
+    alpha: true,
   });
 
   // Lighting
