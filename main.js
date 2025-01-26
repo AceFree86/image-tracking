@@ -61,6 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+  anchor.onTargetLost = () => {
+    console.log("Target lost");
+   groupM.visible = true;
+  };
+
+
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
