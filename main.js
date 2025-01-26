@@ -15,11 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Modify the camera properties as needed
   camera.fov = 45; // Field of view
-  camera.near = 0.1; // Near clipping plane
-  camera.far = 1000; // Far clipping plane
-  camera.updateProjectionMatrix(); // Update after modifying properties
-
-  camera.position.set(0, 0, 5);
+  
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
