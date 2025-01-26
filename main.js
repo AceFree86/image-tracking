@@ -13,10 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
-  // Modify the camera properties as needed
-  camera.fov = 45; // Field of view
-  
-
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
