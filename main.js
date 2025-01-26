@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(directionalLight2);
 
   const groupM = new THREE.Group();
+  scene.add(groupM);
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
@@ -63,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      camera.lookAt(groupM.position);
       renderer.render(scene, camera);
     });
   };
