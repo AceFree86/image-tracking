@@ -3,15 +3,15 @@ import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector("#container");
-
   const mindarThree = new MindARThree({
-    container,
+    container: document.querySelector("#container"),
     imageTargetSrc:
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
-    missTolerance: 1,
+    filterMinCF: 0.1, // Reduce jittering (default is 0.001)
+    filterBeta: 10, // Reduce delay (default is 1000)
+    warmupTolerance: 1, // Faster target detection (default is 5)
+    missTolerance: 1, // Faster target lost detection (default is 5)
   });
-
   const { renderer, scene, camera } = mindarThree;
 
   // Lighting
