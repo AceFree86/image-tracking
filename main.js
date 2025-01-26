@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
+  let angle = 0; // Initialize angle for rotation
+  const radius = 5; // Distance from the object
+
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -63,7 +66,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      groupM.lookAt(new THREE.Vector3());
+      angle += 0.01;
+
+      // Update camera position to rotate around the object
+      camera.position.x = radius * Math.cos(angle); // x-coordinate
+      camera.position.z = radius * Math.sin(angle); // z-coordinate
+
+      // Ensure the camera is looking at the object's position (0, 0, 0)
+      camera.lookAt(groupM.position);
       renderer.render(scene, camera);
     });
   };
