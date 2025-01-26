@@ -12,8 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
     warmupTolerance: 1, // Faster target detection (default is 5)
     missTolerance: 1, // Faster target lost detection (default is 5)
   });
-
   const { renderer, scene, camera } = mindarThree;
+
+  // Custom camera setup
+  const customCamera = new THREE.PerspectiveCamera(
+    75, // FOV (Field of View)
+    window.innerWidth / window.innerHeight, // Aspect ratio
+    0.1, // Near plane
+    1000 // Far plane
+  );
+  customCamera.position.set(0, 1.6, 3); // Position it in front of the scene
+  customCamera.lookAt(0, 1.6, 0);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -62,11 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
+  // Update renderer size on window resize
+  window.addEventListener("resize", () => {
+    customCamera.aspect = window.innerWidth / window.innerHeight;
+    customCamera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
   // start AR
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      renderer.render(scene, camera);
+      renderer.render(scene, customCamera);
     });
   };
 
