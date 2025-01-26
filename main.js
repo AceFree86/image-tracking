@@ -11,12 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene, camera } = mindarThree;
+  const { renderer, scene } = mindarThree;
 
-  // Set camera near and far planes
-  camera.near = 0.1; // Minimum render distance
-  camera.far = 1000; // Maximum render distance
-  camera.updateProjectionMatrix(); // Apply the changes to the camera
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+
+  camera.position.set(0, 0, 5);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -68,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      camera.updateProjectionMatrix();
       renderer.render(scene, camera);
     });
   };
