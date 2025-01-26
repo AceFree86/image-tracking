@@ -14,8 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
-  camera.fov = 60; // Change field of view
-  camera.updateProjectionMatrix();
+  // Custom camera setup
+  const customCamera = new THREE.PerspectiveCamera(
+    75, // FOV (Field of View)
+    window.innerWidth / window.innerHeight, // Aspect ratio
+    0.1, // Near plane
+    1000 // Far plane
+  );
+  customCamera.position.set(0, 1.6, 3); // Position it in front of the scene
+  customCamera.lookAt(0, 1.6, 0);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -64,28 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
- anchor.onTargetLost = () => {
-   console.log("Target lost");
-   groupM.userData.shouldBeVisible = true; // Custom flag to track visibility
- };
-
- anchor.onTargetFound = () => {
-   console.log("Target found");
-   groupM.userData.shouldBeVisible = true; // Ensure it's visible when found
- };
-
+  // Update renderer size on window resize
+  window.addEventListener("resize", () => {
+    customCamera.aspect = window.innerWidth / window.innerHeight;
+    customCamera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 
   // start AR
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-       if (groupM.userData.shouldBeVisible !== undefined) {
-         groupM.visible = groupM.userData.shouldBeVisible;
-       }
-       if (groupM.visible && !anchor.isTracking) {
-         groupM.visible = true; // Force visible, even when target is lost
-       }
-      renderer.render(scene, camera);
+      renderer.render(scene, customCamera);
     });
   };
 
