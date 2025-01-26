@@ -27,8 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(directionalLight2);
 
   const groupM = new THREE.Group();
-  const anchor = mindarThree.addAnchor(0);
-  anchor.group.add(groupM);
 
   // Load the GLTF model
   const url =
@@ -60,12 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error loading model:", error);
     }
   );
+  const anchor = mindarThree.addAnchor(0);
+  anchor.group.add(groupM);
 
   anchor.onTargetLost = () => {
     console.log("Target lost");
-   groupM.visible = true;
+    groupM.visible = true;
   };
-
 
   const start = async () => {
     await mindarThree.start();
