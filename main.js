@@ -11,14 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "https://acefree86.github.io/image-tracking-2/assets/Image/targets.mind",
   });
 
-  const { renderer, scene } = mindarThree;
+  const { renderer, scene, camera } = mindarThree;
 
-  const camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
+  // Modify the camera properties as needed
+  camera.fov = 45; // Field of view
+  camera.near = 0.1; // Near clipping plane
+  camera.far = 1000; // Far clipping plane
+  camera.updateProjectionMatrix(); // Update after modifying properties
 
   camera.position.set(0, 0, 5);
 
