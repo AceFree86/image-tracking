@@ -64,16 +64,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
-  anchor.onTargetLost = () => {
-    console.log("Target lost");
-    groupM.visible = true;
-  };
+ anchor.onTargetLost = () => {
+   console.log("Target lost");
+   groupM.userData.shouldBeVisible = true; // Custom flag to track visibility
+ };
+
+ anchor.onTargetFound = () => {
+   console.log("Target found");
+   groupM.userData.shouldBeVisible = true; // Ensure it's visible when found
+ };
+
 
   // start AR
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
-      camera.updateProjectionMatrix();
+       if (groupM.userData.shouldBeVisible !== undefined) {
+         groupM.visible = groupM.userData.shouldBeVisible;
+       }
       renderer.render(scene, camera);
     });
   };
