@@ -82,6 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
        if (groupM.userData.shouldBeVisible !== undefined) {
          groupM.visible = groupM.userData.shouldBeVisible;
        }
+       if (groupM.visible && !anchor.isTracking) {
+         groupM.visible = true; // Force visible, even when target is lost
+       }
       renderer.render(scene, camera);
     });
   };
