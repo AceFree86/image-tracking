@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
+  camera.fov = 60; // Change field of view
+  camera.updateProjectionMatrix();
+
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -66,9 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
     groupM.visible = true;
   };
 
+  // start AR
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
+      camera.updateProjectionMatrix();
       renderer.render(scene, camera);
     });
   };
