@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
@@ -95,11 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add an event listener for visibility change
   document.addEventListener("visibilitychange", () => {
-      if (isRunning) {
-        stop();
-      } else {
-        start();
-      }
+    if (isRunning) {
+      stop();
+    } else {
+      start();
+    }
   });
 
   // Toggle AR on Button Click
@@ -115,21 +114,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  screenshotButton.addEventListener("click", () => {
-    if (screenshotButton) {
-      const canvas = html2canvas(bodyElement);
-      const imageURL = canvas.toDataURL();
-      // Create a temporary link element
-      const downloadLink = document.createElement("a");
-      downloadLink.href = imageURL; // Set the download URL
-      downloadLink.download = "image.png"; // Set the download file name
-      // Append the link to the body and trigger a click event
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      // Optionally, remove the link after triggering the download
-      document.body.removeChild(downloadLink);
-    } else {
-      console.error("Screenshot button not found!");
+  screenshotButton.addEventListener("click", async () => {
+    try {
+      if (screenshotButton) {
+        // Ensure html2canvas is awaited correctly
+        const canvas = await html2canvas(bodyElement); // Capture the screenshot
+        const imageURL = canvas.toDataURL(); // Get the data URL of the screenshot
+
+        // Create a download link
+        const downloadLink = document.createElement("a");
+        downloadLink.href = imageURL; // Set the download URL
+        downloadLink.download = "image.png"; // Set the download file name
+
+        // Append the link, trigger the click event to download the file, and then remove the link
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      } else {
+        console.error("Screenshot button not found!");
+      }
+    } catch (error) {
+      console.error("Error capturing screenshot:", error);
     }
   });
 });
