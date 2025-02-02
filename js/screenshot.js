@@ -10,18 +10,14 @@ export function loadHtml2Canvas(callback) {
   }
 }
 
-export function takeScreenshot() {
-  console.log("Taking screenshot...");
-
-  const screenshotButton = document.getElementById("screenshotButton");
-
-  // Hide button before taking a screenshot
-  screenshotButton.style.display = "none";
+export function takeScreenshot(element) {
+  // Hide 
+  element.style.display = "none";
 
   setTimeout(() => {
     html2canvas(document.body).then((canvas) => {
-      // Restore button visibility
-      screenshotButton.style.display = "block";
+      // Restore visibility
+      element.style.display = "block";
 
       // Convert screenshot to image and trigger download
       const link = document.createElement("a");
@@ -30,15 +26,4 @@ export function takeScreenshot() {
       link.click();
     });
   }, 100);
-}
-
-export function initScreenshotButton() {
-  const screenshotButton = document.getElementById("screenshotButton");
-  if (screenshotButton) {
-    screenshotButton.addEventListener("click", () => {
-      loadHtml2Canvas(takeScreenshot);
-    });
-  } else {
-    console.error("Screenshot button not found!");
-  }
 }

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { initScreenshotButton } from "./js/screenshot.js";
+import { loadHtml2Canvas, takeScreenshot } from "./screenshot.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
@@ -13,8 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     warmupTolerance: 1, // Faster target detection (default is 5)
     missTolerance: 1, // Faster target lost detection (default is 5)
   });
+
   const { renderer, scene, camera } = mindarThree;
 
+  const control = document.querySelector("#control");
   const startButton = document.querySelector("#startButton");
   const errorDisplay = document.querySelector("#error-message");
   const screenshotButton = document.getElementById("screenshotButton");
@@ -103,6 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   screenshotButton.addEventListener("click", () => {
-    initScreenshotButton();
+    if (screenshotButton) {
+      screenshotButton.addEventListener("click", () => {
+        loadHtml2Canvas(() => {
+          takeScreenshot(control);
+        });
+      });
+    } else {
+      console.error("Screenshot button not found!");
+    }
   });
 });
