@@ -7,6 +7,15 @@ body {
   padding: 10px 20px;
   font-size: 25px;
   cursor: pointer;
+  display: inline-flex; /* Ensures button content stays aligned */
+  justify-content: center; /* Centers the SVG inside the button */
+  align-items: center; /* Centers the SVG vertically */
+  overflow: hidden; /* Prevents the SVG from overflowing the button */
+}
+
+svg {
+  width: 100%; /* Makes the SVG scale to fill the button */
+  height: 100%; /* Ensures the SVG takes up the full button height */
 }
 
 
