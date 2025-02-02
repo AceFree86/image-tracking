@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { loadHtml2Canvas, takeScreenshot } from "./js/screenshot.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -107,11 +106,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   screenshotButton.addEventListener("click", () => {
     if (screenshotButton) {
-      screenshotButton.addEventListener("click", () => {
-        loadHtml2Canvas(() => {
-          takeScreenshot(control);
-        });
-      });
+       html2canvas(document.body, {
+         windowHeight: window.outerHeight + window.innerHeight,
+         windowWidth: window.outerWidth + window.innerWidth,
+         allowTaint: true,
+         useCORS: true,
+       }).then(function (canvas) {
+         // Save the screenshot as a PNG image
+         const link = document.createElement("a");
+         link.href = canvas.toDataURL("image/png");
+         link.download = "screenshot.png";
+         link.click();
+       });
     } else {
       console.error("Screenshot button not found!");
     }
