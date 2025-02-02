@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
+
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
+  const groupM = new THREE.Group();
+const errorDisplay = document.querySelector("#error-message");
 const progressBar = document.querySelector("#progress-bar");
   // Load the GLTF model
   const url =
@@ -33,43 +36,45 @@ const progressBar = document.querySelector("#progress-bar");
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
-  let model;
-  let isModelPlaced = false;
-
-
   loader.load(
     url,
     (gltf) => {
-      model = gltf.scene;
+      const model = gltf.scene;
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
-      model.traverse((child) => {
-        if (child.isMesh) {
-          child.castShadow = true; // Model casts shadows
-          child.receiveShadow = true; // Model receives shadows
-        }
-      });
-      scene.add(model);
+      groupM.add(model);
+
+      // Hide the progress bar after loading
       if (progressBar) {
-        progressBar.style.display = "none"; // Hide progress bar after loading
+        progressBar.style.width = "100%";
+        setTimeout(() => {
+          progressBar.parentElement.style.display = "none";
+        }, 300); // Wait for the transition to complete
       }
     },
     (xhr) => {
+      // Update the progress bar
       if (progressBar) {
         const percent = (xhr.loaded / xhr.total) * 100;
         progressBar.style.width = `${percent}%`;
       }
     },
     (error) => {
-      console.error("Error loading model:", error);
       if (errorDisplay) {
         errorDisplay.textContent = `Error: ${error.message}`;
       }
+      console.error("Error loading model:", error);
+
+      // Hide the progress bar on error
+      if (progressBar) {
+        progressBar.parentElement.style.display = "none";
+      }
     }
   );
+
   const anchor = mindarThree.addAnchor(0);
-  anchor.group.add(model);
+  anchor.group.add(groupM);
 
   // start AR
   const start = async () => {
