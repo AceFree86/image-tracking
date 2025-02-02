@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (errorDisplay) {
         errorDisplay.textContent = `Error: ${error.message}`;
       }
-      console.error("Error loading model:", error);
     }
   );
   const anchor = mindarThree.addAnchor(0);
