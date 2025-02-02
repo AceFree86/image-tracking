@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (errorDisplay) {
         errorDisplay.textContent = "loaded";
         errorDisplay.style.color = "blue";
-        errorDisplay.style.fontSize = "12px";
+        errorDisplay.style.fontSize = "15px";
       }
       console.log(
         `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     (error) => {
       if (errorDisplay) {
-        errorDisplay.textContent = "loaded";
+        errorDisplay.textContent = "Error";
         errorDisplay.style.color = "red";
         errorDisplay.style.fontSize = "15px";
         console.error(`Error: ${error.message}`);
