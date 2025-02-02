@@ -53,7 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     (xhr) => {
       if (errorDisplay) {
-        errorDisplay.textContent = "Model loaded successfully";
+        errorDisplay.textContent = "loaded";
+        errorDisplay.style.color = "blue";
+        errorDisplay.style.fontSize = "12px";
       }
       console.log(
         `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
@@ -61,10 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     (error) => {
       if (errorDisplay) {
-        errorDisplay.textContent = `Error: ${error.message}`;
+        errorDisplay.textContent = "loaded";
+        errorDisplay.style.color = "red";
+        errorDisplay.style.fontSize = "15px";
+        console.error(`Error: ${error.message}`);
       }
     }
   );
+
+
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
