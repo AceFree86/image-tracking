@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
+  const startButton = document.querySelector("#startButton");
+
   const groupM = new THREE.Group();
   let isRunning = false;
 
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
     isRunning = false;
-    startButton.textContent = "Стартaa";
+    startButton.textContent = "Старт";
   };
 
   // Add an event listener for visibility change
@@ -97,11 +99,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document.querySelector("#stopButton").addEventListener("click", () => {
+  // Toggle AR on Button Click
+  startButton.addEventListener("click", () => {
     if (isRunning) {
-      stop(); // Stop AR if it's running
+      stop();
     } else {
-      start(); // Start AR if it's stopped
+      start();
     }
   });
 });
