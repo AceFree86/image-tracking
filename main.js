@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add an event listener for visibility change
   document.addEventListener("visibilitychange", () => {
-    location.reload(); 
+    location.reload();
   });
 
   // Toggle AR on Button Click
@@ -107,5 +107,4 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("startButton button not found!");
     }
   });
-
 });
