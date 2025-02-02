@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
     container: document.querySelector("#container"),
@@ -16,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
+  const bodyElement = document.body;
   const control = document.querySelector("#control");
   const startButton = document.querySelector("#startButton");
   const errorDisplay = document.querySelector("#error-message");
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Toggle AR on Button Click
   startButton.addEventListener("click", () => {
     if (startButton) {
-       if (isRunning) {
+      if (isRunning) {
         stop();
       } else {
         start();
@@ -106,23 +106,15 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       console.error("startButton button not found!");
     }
-     
   });
 
   screenshotButton.addEventListener("click", () => {
     if (screenshotButton) {
-       html2canvas(document.body, {
-         windowHeight: window.outerHeight + window.innerHeight,
-         windowWidth: window.outerWidth + window.innerWidth,
-         allowTaint: true,
-         useCORS: true,
-       }).then(function (canvas) {
-         // Save the screenshot as a PNG image
-         const link = document.createElement("a");
-         link.href = canvas.toDataURL("image/png");
-         link.download = "screenshot.png";
-         link.click();
-       });
+      downloadButton.classList.remove("hide");
+      const canvas = html2canvas(bodyElement);
+      const imageURL = canvas.toDataURL();
+      downloadButton.href = imageURL;
+      downloadButton.download = "image.png";
     } else {
       console.error("Screenshot button not found!");
     }
