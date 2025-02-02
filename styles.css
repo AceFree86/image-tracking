@@ -35,9 +35,6 @@ svg {
   padding: 5px;  /* Reduced padding for compactness */
   border-radius: 8px;
   display: flex;
-  flex-direction: column;  /* Stack children vertically */
-  align-items: center; /* Center the children horizontally */
-  gap: 5px; /* Space between elements */
 }
 
 button {
