@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     isRunning = true;
     startButton.textContent = "Стоп";
+    errorDisplay.style.display = "none";
   };
 
   // Stop AR
@@ -91,11 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add an event listener for visibility change
   document.addEventListener("visibilitychange", () => {
-    if (isRunning) {
-      stop();
-    } else {
-      start();
-    }
+    location.reload(); 
   });
 
   // Toggle AR on Button Click
