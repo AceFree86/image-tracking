@@ -128,6 +128,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.onload = () => {
-  downloadButton.classList.add("hide");
   previewContainer.innerHTML = "";
 };
