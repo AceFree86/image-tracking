@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load the GLTF model
   const url =
-    "https://acefree86.github.io/image-tracking/assets/models/Cake.glb";
+    "https://acefree86.github.io/image-tracking/assets/models/Cake_Anim.glb";
   const loader = new GLTFLoader();
 
   loader.load(
