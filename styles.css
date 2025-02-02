@@ -9,10 +9,6 @@ body {
   overflow: hidden;
 }
 
-#error-message {
-  writing-mode: vertical-lr;
-  text-orientation: upright;
-}
 
 #control {
   position: fixed;
