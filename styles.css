@@ -32,8 +32,12 @@ svg {
   left: 0;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
+  padding: 5px;  /* Reduced padding for compactness */
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;  /* Stack children vertically */
+  align-items: center; /* Center the children horizontally */
+  gap: 5px; /* Space between elements */
 }
 
 button {

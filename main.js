@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   screenshotButton.addEventListener("click", async () => {
     try {
       if (screenshotButton) {
+         control.style.display = "none";
         // Ensure html2canvas is awaited correctly
         const canvas = await html2canvas(bodyElement); // Capture the screenshot
         const imageURL = canvas.toDataURL(); // Get the data URL of the screenshot
@@ -130,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
+        control.style.display = "block";
       } else {
         console.error("Screenshot button not found!");
       }
