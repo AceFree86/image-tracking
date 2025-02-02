@@ -97,11 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Toggle AR on Button Click
   startButton.addEventListener("click", () => {
-    if (isRunning) {
-      stop();
+    if (startButton) {
+       if (isRunning) {
+        stop();
+      } else {
+        start();
+      }
     } else {
-      start();
+      console.error("startButton button not found!");
     }
+     
   });
 
   screenshotButton.addEventListener("click", () => {
