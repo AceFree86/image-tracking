@@ -95,15 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add an event listener for visibility change
   document.addEventListener("visibilitychange", () => {
-    if (startButton) {
       if (isRunning) {
         stop();
       } else {
         start();
       }
-    } else {
-      console.error("startButton button not found!");
-    }
   });
 
   // Toggle AR on Button Click
