@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { initScreenshotButton } from "./screenshot.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
@@ -16,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startButton = document.querySelector("#startButton");
   const errorDisplay = document.querySelector("#error-message");
+  const screenshotButton = document.getElementById("screenshotButton");
+
   let isRunning = false;
 
   // Lighting
@@ -97,5 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       start();
     }
+  });
+
+  screenshotButton.addEventListener("click", () => {
+    initScreenshotButton();
   });
 });
