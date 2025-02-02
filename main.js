@@ -14,12 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
-   const startButton = document.querySelector("#startButton");
-   if (!startButton) {
-     console.error("Error: Start button not found!");
-     return;
-   }
-
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -48,15 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
-
-      // Enable shadows for the model
-      model.traverse((child) => {
-        if (child.isMesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
-
       groupM.add(model);
     },
     (xhr) => {
@@ -83,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderer.render(scene, camera);
     });
     isRunning = true;
-    startButton.textContent = "Стоп";
   };
 
   // Stop AR
@@ -91,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
     isRunning = false;
-    startButton.textContent = "Старт";
   };
 
   // Add an event listener for visibility change
@@ -103,11 +86,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Toggle AR on Button Click
+  const startButton = document.querySelector("#startButton");
   startButton.addEventListener("click", () => {
     if (isRunning) {
+      startButton.textContent = "Старт";
       stop();
     } else {
+      startButton.textContent = "Стоп";
       start();
     }
   });
