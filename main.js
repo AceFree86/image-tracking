@@ -110,11 +110,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   screenshotButton.addEventListener("click", () => {
     if (screenshotButton) {
-      downloadButton.classList.remove("hide");
       const canvas = html2canvas(bodyElement);
       const imageURL = canvas.toDataURL();
+      // Create a temporary link element
+      const downloadLink = document.createElement("a");
+      downloadLink.href = imageURL; // Set the download URL
+      downloadLink.download = "image.png"; // Set the download file name
+      // Append the link to the body and trigger a click event
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      // Optionally, remove the link after triggering the download
+      document.body.removeChild(downloadLink);
     } else {
       console.error("Screenshot button not found!");
     }
   });
 });
+
+window.onload = () => {
+  downloadButton.classList.add("hide");
+  previewContainer.innerHTML = "";
+};
