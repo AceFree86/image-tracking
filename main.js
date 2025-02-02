@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startButton = document.querySelector("#startButton");
   const errorDisplay = document.querySelector("#error-message");
-
   let isRunning = false;
+
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -26,6 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
   directionalLight1.position.set(5, 5, 5);
+  directionalLight1.castShadow = true;
+  directionalLight1.shadow.mapSize.width = 1024;
+  directionalLight1.shadow.mapSize.height = 1024;
+  directionalLight1.shadow.camera.near = 0.5;
+  directionalLight1.shadow.camera.far = 500;
   scene.add(directionalLight1);
 
   const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
