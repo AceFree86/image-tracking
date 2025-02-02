@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
+  const startButton = document.querySelector("#startButton");
+  const errorDisplay = document.querySelector("#error-message");
+  let isRunning = false;
+
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -27,13 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(directionalLight2);
 
   const groupM = new THREE.Group();
-  let isRunning = false;
 
   // Load the GLTF model
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/Cake.glb";
   const loader = new GLTFLoader();
-  const errorDisplay = document.querySelector("#error-message");
 
   loader.load(
     url,
@@ -68,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       renderer.render(scene, camera);
     });
     isRunning = true;
+    startButton.textContent = "Стоп";
   };
 
   // Stop AR
@@ -75,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
     isRunning = false;
+    startButton.textContent = "Старт";
   };
 
   // Add an event listener for visibility change
@@ -86,13 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const startButton = document.querySelector("#startButton");
+  // Toggle AR on Button Click
   startButton.addEventListener("click", () => {
     if (isRunning) {
-      startButton.textContent = "Старт";
       stop();
     } else {
-      startButton.textContent = "Стоп";
       start();
     }
   });
