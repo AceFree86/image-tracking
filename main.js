@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
-
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -28,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.add(directionalLight2);
 
   const groupM = new THREE.Group();
+  let isRunning = false;
 
   // Load the GLTF model
   const url =
@@ -42,6 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
+
+      // Enable shadows for the model
+      model.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
       groupM.add(model);
     },
     (xhr) => {
@@ -61,17 +70,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = mindarThree.addAnchor(0);
   anchor.group.add(groupM);
 
-  // start AR
+  // Start AR
   const start = async () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
     });
+    isRunning = true;
+    startButton.textContent = "Стоп";
   };
 
-  document.querySelector("#startButton").addEventListener("click", start);
-  document.querySelector("#stopButton").addEventListener("click", () => {
+  // Stop AR
+  const stop = () => {
     mindarThree.stop();
     renderer.setAnimationLoop(null);
+    isRunning = false;
+    startButton.textContent = "Стартaa";
+  };
+
+  // Add an event listener for visibility change
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      // Stop mindarThree when the page becomes inactive
+      mindarThree.stop();
+      renderer.setAnimationLoop(null);
+    }
+  });
+
+  document.querySelector("#stopButton").addEventListener("click", () => {
+    if (isRunning) {
+      stop(); // Stop AR if it's running
+    } else {
+      start(); // Start AR if it's stopped
+    }
   });
 });
