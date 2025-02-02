@@ -10,15 +10,17 @@ body {
 }
 
 #error-message {
- writing-mode: vertical-lr;
- text-orientation: upright;
+  margin: 0;
+  padding: 0;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
 }
 
 #control {
   position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 2;
+  top: 0;
+  left: 0;
+  z-index: 2;
   background-color: rgba(255, 255, 255, 0.8);
 }
 
