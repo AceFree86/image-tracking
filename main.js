@@ -15,11 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const { renderer, scene, camera } = mindarThree;
 
-  const bodyElement = document.body;
-  const control = document.querySelector("#control");
   const startButton = document.querySelector("#startButton");
   const errorDisplay = document.querySelector("#error-message");
-  const screenshotButton = document.getElementById("screenshotButton");
 
   let isRunning = false;
 
@@ -114,29 +111,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  screenshotButton.addEventListener("click", async () => {
-    try {
-      if (screenshotButton) {
-         control.style.display = "none";
-        // Ensure html2canvas is awaited correctly
-        const canvas = await html2canvas(bodyElement); // Capture the screenshot
-        const imageURL = canvas.toDataURL(); // Get the data URL of the screenshot
-
-        // Create a download link
-        const downloadLink = document.createElement("a");
-        downloadLink.href = imageURL; // Set the download URL
-        downloadLink.download = "image.png"; // Set the download file name
-
-        // Append the link, trigger the click event to download the file, and then remove the link
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        control.style.display = "block";
-      } else {
-        console.error("Screenshot button not found!");
-      }
-    } catch (error) {
-      console.error("Error capturing screenshot:", error);
-    }
-  });
 });
