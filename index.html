@@ -16,12 +16,18 @@
     <script src="main.js" type="module" defer></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+ <body>
+    <!-- Progress bar for model loading -->
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+    <!-- Control panel for buttons and error messages -->
     <div id="control">
-      <p id="error-message" style="color: red"></p>
-      <button id="startButton">Стартaa</button>
+      <p id="error-message"></p>
+      <button id="startButton">Старт</button>
       <button id="stopButton">Стоп</button>
     </div>
+    <!-- Container for the AR scene -->
     <div id="container"></div>
   </body>
 </html>

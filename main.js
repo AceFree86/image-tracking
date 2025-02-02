@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const { renderer, scene, camera } = mindarThree;
 
-
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -27,40 +26,50 @@ document.addEventListener("DOMContentLoaded", () => {
   directionalLight2.position.set(-5, -5, 5);
   scene.add(directionalLight2);
 
-  const groupM = new THREE.Group();
-
+const progressBar = document.querySelector("#progress-bar");
   // Load the GLTF model
   const url =
     "https://acefree86.github.io/image-tracking/assets/models/Cake.glb";
   const loader = new GLTFLoader();
   const errorDisplay = document.querySelector("#error-message");
 
+  let model;
+  let isModelPlaced = false;
+
+
   loader.load(
     url,
     (gltf) => {
-      const model = gltf.scene;
+      model = gltf.scene;
       model.position.set(0, 0, 0);
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
-      groupM.add(model);
+      model.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true; // Model casts shadows
+          child.receiveShadow = true; // Model receives shadows
+        }
+      });
+      scene.add(model);
+      if (progressBar) {
+        progressBar.style.display = "none"; // Hide progress bar after loading
+      }
     },
     (xhr) => {
-      if (errorDisplay) {
-        errorDisplay.textContent = "Model loaded successfully";
+      if (progressBar) {
+        const percent = (xhr.loaded / xhr.total) * 100;
+        progressBar.style.width = `${percent}%`;
       }
-      console.log(
-        `Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`
-      );
     },
     (error) => {
+      console.error("Error loading model:", error);
       if (errorDisplay) {
         errorDisplay.textContent = `Error: ${error.message}`;
       }
-      console.error("Error loading model:", error);
     }
   );
   const anchor = mindarThree.addAnchor(0);
-  anchor.group.add(groupM);
+  anchor.group.add(model);
 
   // start AR
   const start = async () => {
