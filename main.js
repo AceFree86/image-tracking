@@ -133,7 +133,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-window.onload = () => {
-  previewContainer.innerHTML = "";
-};
