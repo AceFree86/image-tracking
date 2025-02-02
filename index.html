@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>My first three.js app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="importmap">
       {
         "imports": {
@@ -20,9 +20,86 @@
     <div id="control">
       <p id="error-message" style="color: red"></p>
       <button id="startButton">Старт</button>
-      <button id="screenshotButton"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="200" height="200" viewBox="0 0 100 100">
-<path fill="#e3e2e3" d="M70,82H31c-6.6,0-12-5.4-12-12V31c0-6.6,5.4-12,12-12h39c6.6,0,12,5.4,12,12v39 C82,76.6,76.6,82,70,82z"></path><path fill="#1f212b" d="M70,83H31c-7.18,0-13-5.82-13-13V31c0-7.18,5.82-13,13-13h39c7.18,0,13,5.82,13,13v39 C83,77.18,77.179,83,70,83z M20,31v39c0,6.075,4.925,11,11,11h39c6.075,0,11-4.925,11-11V31c0-6.075-4.925-11-11-11H31 C24.924,20,20,24.925,20,31z"></path><path fill="#1f212b" d="M67.162,78H33.837C27.852,78,23,73.148,23,67.163V33.837C23,27.852,27.852,23,33.837,23H67.5 c0.276,0,0.5,0.224,0.5,0.5S67.776,24,67.5,24H33.837C28.404,24,24,28.404,24,33.837v33.325C24,72.595,28.405,77,33.838,77h33.325 C72.596,77,77,72.596,77,67.163V48.5c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v18.662C78,73.148,73.147,78,67.162,78z M77.5,45.579c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v4C78,45.356,77.776,45.579,77.5,45.579z M77.5,39.579c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v2C78,39.356,77.776,39.579,77.5,39.579z"></path><path fill="#75849d" d="M60.015,40.63l-2.919-4.261c-0.373-0.544-0.99-0.87-1.65-0.87h-9.892c-0.66,0-1.277,0.325-1.65,0.87 l-2.919,4.261c-0.373,0.544-0.99,0.87-1.65,0.87H33.5c-1.657,0-3,1.343-3,3v20c0,1.657,1.343,3,3,3h34c1.657,0,3-1.343,3-3v-20 c0-1.657-1.343-3-3-3h-5.835C61.005,41.5,60.388,41.175,60.015,40.63z"></path><path fill="#75849d" d="M38.5,38.5h-5v-2c0-0.552,0.448-1,1-1h3c0.552,0,1,0.448,1,1V38.5z"></path><circle cx="50.5" cy="53.5" r="10" fill="#e3e2e3"></circle><circle cx="50.5" cy="53.5" r="7" fill="#75849d"></circle><circle cx="63.5" cy="46.5" r="2" fill="#eddc67"></circle><path fill="none" stroke="#1f212b" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M60.015,40.63 l-2.919-4.261c-0.373-0.544-0.99-0.87-1.65-0.87h-9.892c-0.66,0-1.277,0.325-1.65,0.87l-2.919,4.261 c-0.373,0.544-0.99,0.87-1.65,0.87H33.5c-1.657,0-3,1.343-3,3v20c0,1.657,1.343,3,3,3h34c1.657,0,3-1.343,3-3v-20 c0-1.657-1.343-3-3-3h-5.835C61.005,41.5,60.388,41.175,60.015,40.63z"></path><circle cx="50.5" cy="53.5" r="10" fill="none" stroke="#1f212b" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle><circle cx="50.5" cy="53.5" r="7" fill="none" stroke="#1f212b" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle><path fill="none" stroke="#1f212b" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M38.5,38.5h-5v-2 c0-0.552,0.448-1,1-1h3c0.552,0,1,0.448,1,1V38.5z"></path><circle cx="63.5" cy="46.5" r="2" fill="none" stroke="#1f212b" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></circle>
-</svg></button>
+      <button id="screenshotButton">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          width="100"
+          height="100"
+          viewBox="0 0 100 100"
+        >
+          <path
+            fill="#e3e2e3"
+            d="M70,82H31c-6.6,0-12-5.4-12-12V31c0-6.6,5.4-12,12-12h39c6.6,0,12,5.4,12,12v39 C82,76.6,76.6,82,70,82z"
+          ></path>
+          <path
+            fill="#1f212b"
+            d="M70,83H31c-7.18,0-13-5.82-13-13V31c0-7.18,5.82-13,13-13h39c7.18,0,13,5.82,13,13v39 C83,77.18,77.179,83,70,83z M20,31v39c0,6.075,4.925,11,11,11h39c6.075,0,11-4.925,11-11V31c0-6.075-4.925-11-11-11H31 C24.924,20,20,24.925,20,31z"
+          ></path>
+          <path
+            fill="#1f212b"
+            d="M67.162,78H33.837C27.852,78,23,73.148,23,67.163V33.837C23,27.852,27.852,23,33.837,23H67.5 c0.276,0,0.5,0.224,0.5,0.5S67.776,24,67.5,24H33.837C28.404,24,24,28.404,24,33.837v33.325C24,72.595,28.405,77,33.838,77h33.325 C72.596,77,77,72.596,77,67.163V48.5c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v18.662C78,73.148,73.147,78,67.162,78z M77.5,45.579c-0.276,0-0.5-0.224-0.5-0.5v-4c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v4C78,45.356,77.776,45.579,77.5,45.579z M77.5,39.579c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5s0.5,0.224,0.5,0.5v2C78,39.356,77.776,39.579,77.5,39.579z"
+          ></path>
+          <path
+            fill="#75849d"
+            d="M60.015,40.63l-2.919-4.261c-0.373-0.544-0.99-0.87-1.65-0.87h-9.892c-0.66,0-1.277,0.325-1.65,0.87 l-2.919,4.261c-0.373,0.544-0.99,0.87-1.65,0.87H33.5c-1.657,0-3,1.343-3,3v20c0,1.657,1.343,3,3,3h34c1.657,0,3-1.343,3-3v-20 c0-1.657-1.343-3-3-3h-5.835C61.005,41.5,60.388,41.175,60.015,40.63z"
+          ></path>
+          <path
+            fill="#75849d"
+            d="M38.5,38.5h-5v-2c0-0.552,0.448-1,1-1h3c0.552,0,1,0.448,1,1V38.5z"
+          ></path>
+          <circle cx="50.5" cy="53.5" r="10" fill="#e3e2e3"></circle>
+          <circle cx="50.5" cy="53.5" r="7" fill="#75849d"></circle>
+          <circle cx="63.5" cy="46.5" r="2" fill="#eddc67"></circle>
+          <path
+            fill="none"
+            stroke="#1f212b"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            d="M60.015,40.63 l-2.919-4.261c-0.373-0.544-0.99-0.87-1.65-0.87h-9.892c-0.66,0-1.277,0.325-1.65,0.87l-2.919,4.261 c-0.373,0.544-0.99,0.87-1.65,0.87H33.5c-1.657,0-3,1.343-3,3v20c0,1.657,1.343,3,3,3h34c1.657,0,3-1.343,3-3v-20 c0-1.657-1.343-3-3-3h-5.835C61.005,41.5,60.388,41.175,60.015,40.63z"
+          ></path>
+          <circle
+            cx="50.5"
+            cy="53.5"
+            r="10"
+            fill="none"
+            stroke="#1f212b"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+          ></circle>
+          <circle
+            cx="50.5"
+            cy="53.5"
+            r="7"
+            fill="none"
+            stroke="#1f212b"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+          ></circle>
+          <path
+            fill="none"
+            stroke="#1f212b"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            d="M38.5,38.5h-5v-2 c0-0.552,0.448-1,1-1h3c0.552,0,1,0.448,1,1V38.5z"
+          ></path>
+          <circle
+            cx="63.5"
+            cy="46.5"
+            r="2"
+            fill="none"
+            stroke="#1f212b"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+          ></circle>
+        </svg>
+      </button>
     </div>
     <div id="container"></div>
   </body>
