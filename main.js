@@ -113,8 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
       downloadButton.classList.remove("hide");
       const canvas = html2canvas(bodyElement);
       const imageURL = canvas.toDataURL();
-      downloadButton.href = imageURL;
-      downloadButton.download = "image.png";
     } else {
       console.error("Screenshot button not found!");
     }
