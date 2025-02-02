@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { MindARThree } from "mindar-image-three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { loadHtml2Canvas, takeScreenshot } from "./js/screenshot";
+import { loadHtml2Canvas, takeScreenshot } from "js/screenshot";
 
 document.addEventListener("DOMContentLoaded", () => {
   const mindarThree = new MindARThree({
