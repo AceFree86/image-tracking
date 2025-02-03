@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const startButton = document.querySelector("#startButton");
   const errorDisplay = document.querySelector("#error-message");
   let isRunning = false;
-  let mixer;
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -47,14 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
       model.rotation.set(0, 0, 0); // Reset rotation
       model.scale.set(1, 1, 1);
       groupM.add(model);
-
-      // Set up animation mixer for the loaded model
-      mixer = new THREE.AnimationMixer(model);
-
-      // If the model contains animations, play the first one
-      gltf.animations.forEach((clip) => {
-        mixer.clipAction(clip).play();
-      });
     },
     (xhr) => {
       if (errorDisplay) {
@@ -84,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
-      if (mixer) mixer.update(0.01); // Update the animation mixer
     });
     isRunning = true;
     startButton.textContent = "Стоп";
